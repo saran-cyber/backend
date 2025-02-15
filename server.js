@@ -8,16 +8,16 @@ const app = express();
 
 // Connect to MongoDB
 connectDB()
-  .then(() => console.log("MongoDB Connected"))
+  .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => {
-    console.error("MongoDB Connection Error:", err.message);
-    process.exit(1); // Exit process if DB fails
+    console.error("❌ MongoDB Connection Error:", err.message);
+    process.exit(1);
   });
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*', // Use your frontend URL
+  origin: process.env.FRONTEND_URL || '*',
   credentials: true
 }));
 
@@ -31,9 +31,14 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// ✅ Add a test route to check if the backend is running
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully 🚀');
+});
+
 // Routes
 app.use('/api/businesses', require('./routes/businessRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 
-const PORT = process.env.PORT || 10000; // Use 10000 instead of 5000
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server started on port ${PORT}`));
