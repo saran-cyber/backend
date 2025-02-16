@@ -40,5 +40,6 @@ app.get('/', (req, res) => {
 app.use('/api/businesses', require('./routes/businessRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 
+// ✅ Use dynamic port for Render deployment
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server started on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server started on port ${PORT}`));
